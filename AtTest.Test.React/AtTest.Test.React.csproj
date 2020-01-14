@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <LangVersion>8.0</LangVersion>
+    <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
+    <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <UserSecretsId>AtTest</UserSecretsId>
+    <Platforms>x64</Platforms>
+    <NoWarn>NU1605</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutputPath>bin\Debug\</OutputPath>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutputPath>bin\Release\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
+    <PackageReference Include="Signum.Analyzer" Version="2.5.0" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
+    <PackageReference Include="Selenium.Chrome.WebDriver" Version="77.0.0" />
+    <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Extensions\Signum.Engine.Extensions\Signum.Engine.Extensions.csproj" />
+    <ProjectReference Include="..\Extensions\Signum.Entities.Extensions\Signum.Entities.Extensions.csproj" />
+    <ProjectReference Include="..\Extensions\Signum.React.Extensions.Selenium\Signum.React.Extensions.Selenium.csproj" />
+    <ProjectReference Include="..\Framework\Signum.Entities\Signum.Entities.csproj" />
+    <ProjectReference Include="..\Framework\Signum.Engine\Signum.Engine.csproj" />
+    <ProjectReference Include="..\Framework\Signum.Utilities\Signum.Utilities.csproj" />
+    <ProjectReference Include="..\AtTest.Entities\AtTest.Entities.csproj" />
+    <ProjectReference Include="..\AtTest.Logic\AtTest.Logic.csproj" />
+    <ProjectReference Include="..\AtTest.Test.Environment\AtTest.Test.Environment.csproj" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+</Project>

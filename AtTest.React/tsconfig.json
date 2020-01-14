@@ -1,0 +1,41 @@
+﻿{
+  "compilerOptions": {
+    "target": "es5",
+    "sourceMap": false,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "jsx": "react",
+    "incremental": true,
+    "composite": true,
+    "outDir": "./ts_out",
+    //"noEmit": true,
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "*": [
+        "../Framework/Signum.React/node_modules/@types/*",
+        "../Framework/Signum.React/node_modules/*",
+        "*"
+      ],
+      "@framework/*": [ "../Framework/Signum.React/Scripts/*" ],
+      "@extensions/*": [ "../Extensions/Signum.React.Extensions/*" ]
+    },
+    "lib": [
+      "es2017",
+      //"esnext",
+      "dom"
+    ]
+  },
+  "exclude": [
+    "./node_modules",
+    "./ts_out",
+    "../Framework/Signum.React/node_modules",
+    "../Framework/Signum.React/ts_out",
+    "../Extensions/Signum.React.Extensions/node_modules",
+    "../Extensions/Signum.React.Extensions/ts_out"
+  ],
+  "references": [
+    { "path": "../Framework/Signum.React" },
+    { "path": "../Extensions/Signum.React.Extensions" }
+  ]
+}

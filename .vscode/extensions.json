@@ -1,0 +1,9 @@
+﻿{
+  "recommendations": [
+    "ms-vscode.csharp",
+    "EditorConfig.EditorConfig",
+    "CoenraadS.bracket-pair-colorizer",
+    "formulahendry.auto-rename-tag",
+    "formulahendry.dotnet-test-explorer",
+  ]
+}

@@ -1,0 +1,60 @@
+﻿{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": ".NET Core Launch (Load)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/AtTest.Load/bin/Debug/netcoreapp2.2/AtTest.Load.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/AtTest.Load/bin/Debug/netcoreapp2.2/",
+      "console": "integratedTerminal",
+      "stopAtEntry": false,
+      "internalConsoleOptions": "openOnSessionStart",
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "dev"
+      },
+    },
+    {
+      "name": ".NET Core Launch (React)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/AtTest.React/bin/netcoreapp2.2/AtTest.React.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/AtTest.React/",
+      "stopAtEntry": false,
+      "internalConsoleOptions": "openOnSessionStart",
+      "launchBrowser": {
+        "enabled": true,
+        "args": "${auto-detect-url}",
+        "windows": {
+          "command": "cmd.exe",
+          "args": "/C start ${auto-detect-url}"
+        },
+        "osx": {
+          "command": "open"
+        },
+        "linux": {
+          "command": "xdg-open"
+        }
+      },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "dev"
+      },
+      "sourceFileMap": {
+        "/Views": "${workspaceFolder}/Views"
+      }
+    },
+    {
+      "name": ".NET Core Attach",
+      "type": "coreclr",
+      "request": "attach",
+      "processId": "${command:pickProcess}"
+    }
+  ]
+}

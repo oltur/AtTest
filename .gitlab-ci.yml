@@ -1,0 +1,102 @@
+﻿variables:
+  GIT_SUBMODULE_STRATEGY: normal
+
+stages:
+  - deploy
+  - testLogic
+  - testUI
+
+dev-deploy:
+  environment:
+     name: DEV
+     url: http://dev.at-test.firm/
+  stage: deploy
+  variables:
+    ASPNETCORE_ENVIRONMENT: Dev
+  script:
+    - cd AtTest.React/; yarn install --ignore-optional; cd ..
+    - dotnet build AtTest.sln /p:Configuration=Release /p:Platform=x64 /p:VisualStudioVersion=15.0 /m
+    - cd AtTest.React/; yarn run build; cd ..
+    - dotnet publish AtTest.React/AtTest.React.csproj -c Release --runtime win7-x64 /p:EnableMSDeployAppOffline=true /p:PublishProfile=Dev /p:Username=$env:MSBUILD_USER /p:Password=$env:MSBUILD_PASSWORD /v:normal
+    - dotnet test AtTest.Test.Environment/AtTest.Test.Environment.csproj -c Release
+  tags:
+    - desrv148
+  except: 
+    - TEST
+    - LIVE
+
+unit-tests-logic:
+  environment:
+     name: DEV
+     url: http://dev.at-test.firm/
+  stage: testLogic
+  variables:
+    ASPNETCORE_ENVIRONMENT: Dev
+  script:
+  - dotnet test AtTest.Test.Logic/AtTest.Test.Logic.csproj -c Release
+  allow_failure: true
+  tags:
+    - desrv148
+  except: 
+    - TEST
+    - LIVE
+
+unit-tests-ui:
+  environment:
+     name: DEV
+     url: http://dev.at-test.firm/
+  stage: testUI
+  variables:
+    ASPNETCORE_ENVIRONMENT: dev
+  script:
+    - dotnet test AtTest.Test.React/AtTest.Test.React.csproj -c Release
+  allow_failure: true
+  tags:
+    - desrv148
+  except: 
+    - TEST
+    - LIVE
+
+test-deploy:
+  environment:
+    name: TEST
+    url: http://test.at-test.firm
+  stage: deploy
+  variables:
+    ASPNETCORE_ENVIRONMENT: test
+  script:
+    - cd AtTest.React/; yarn install --ignore-optional; cd ..
+    - dotnet build AtTest.sln /p:Configuration=Release /p:Platform=x64 /p:VisualStudioVersion=15.0 /m
+    - cd AtTest.React/; yarn run build; cd ..
+    - dotnet publish AtTest.React/AtTest.React.csproj -c Release --runtime win7-x64 /p:EnableMSDeployAppOffline=true /p:PublishProfile=Test /p:Username=$env:MSBUILD_USER /p:Password=$env:MSBUILD_PASSWORD /v:m
+    - cd AtTest.Load/bin/Release/netcoreapp2.1/
+    - dotnet AtTest.Load.dll sql
+    - dotnet AtTest.Load.dll csharp
+    - dotnet AtTest.Load.dll auth
+    - cd ../../../..
+  tags:
+    - desrv148
+  only: 
+    - TEST
+
+live-deploy:
+  environment:
+    name: LIVE
+    url: http://live.at-test.firm
+  stage: deploy
+  variables:
+    ASPNETCORE_ENVIRONMENT: live
+  script:
+    - cd AtTest.React/; yarn install --ignore-optional; cd ..
+    - dotnet build AtTest.sln /p:Configuration=Release /p:Platform=x64 /p:VisualStudioVersion=15.0 /m
+    - cd AtTest.React/; yarn run build; cd ..
+    - dotnet publish AtTest.React/AtTest.React.csproj -c Release --runtime win7-x64 /p:EnableMSDeployAppOffline=true /p:PublishProfile=Live /p:Username=$env:MSBUILD_USER /p:Password=$env:MSBUILD_PASSWORD /v:m
+    - cd AtTest.Load/bin/Release/netcoreapp2.1/
+    - dotnet AtTest.Load.dll sql
+    - dotnet AtTest.Load.dll csharp
+    - dotnet AtTest.Load.dll auth
+    - cd ../../../..
+  tags:
+    - desrv148
+  only: 
+    - LIVE
